@@ -75,6 +75,64 @@ public class Main {
         format_old("select group0.[order] as order0 from [Group] group0 where group0.[order]=?1");
     }
 
+    @Benchmark
+    @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public void testFormat_new_once() {
+        format_new_once("insert into Address (city, state, zip, \"from\") values (?, ?, ?, 'insert value')");
+        format_new_once("delete from Address where id = ? and version = ?");
+        format_new_once("update Address set city = ?, state=?, zip=?, version = ? where id = ? and version = ?");
+        format_new_once("update Address set city = ?, state=?, zip=?, version = ? where id in (select aid from Person)");
+        format_new_once(
+                "select p.name, a.zipCode, count(*) from Person p left outer join Employee e on e.id = p.id and p.type = 'E' and (e.effective>? or e.effective<?) join Address a on a.pid = p.id where upper(p.name) like 'G%' and p.age > 100 and (p.sex = 'M' or p.sex = 'F') and coalesce( trim(a.street), a.city, (a.zip) ) is not null order by p.name asc, a.zipCode asc"
+        );
+        format_new_once(
+                "select ( (m.age - p.age) * 12 ), trim(upper(p.name)) from Person p, Person m where p.mother = m.id and ( p.age = (select max(p0.age) from Person p0 where (p0.mother=m.id)) and p.name like ? )"
+        );
+        format_new_once(
+                "select * from Address a join Person p on a.pid = p.id, Person m join Address b on b.pid = m.id where p.mother = m.id and p.name like ?"
+        );
+        format_new_once(
+                "select case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end from Person p where ( case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end ) like ?"
+        );
+        format_new_once(
+                "/* Here we' go! */ select case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end from Person p where ( case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end ) like ?"
+        );
+        format_new_once(
+                "(select p.pid from Address where city = 'Boston') union (select p.pid from Address where city = 'Taipei')"
+        );
+        format_new_once("select group0.[order] as order0 from [Group] group0 where group0.[order]=?1");
+    }
+
+    @Benchmark
+    @BenchmarkMode({Mode.Throughput, Mode.AverageTime})
+    @OutputTimeUnit(TimeUnit.MICROSECONDS)
+    public void testFormat_old_once() {
+        format_old_once("insert into Address (city, state, zip, \"from\") values (?, ?, ?, 'insert value')");
+        format_old_once("delete from Address where id = ? and version = ?");
+        format_old_once("update Address set city = ?, state=?, zip=?, version = ? where id = ? and version = ?");
+        format_old_once("update Address set city = ?, state=?, zip=?, version = ? where id in (select aid from Person)");
+        format_old_once(
+                "select p.name, a.zipCode, count(*) from Person p left outer join Employee e on e.id = p.id and p.type = 'E' and (e.effective>? or e.effective<?) join Address a on a.pid = p.id where upper(p.name) like 'G%' and p.age > 100 and (p.sex = 'M' or p.sex = 'F') and coalesce( trim(a.street), a.city, (a.zip) ) is not null order by p.name asc, a.zipCode asc"
+        );
+        format_old_once(
+                "select ( (m.age - p.age) * 12 ), trim(upper(p.name)) from Person p, Person m where p.mother = m.id and ( p.age = (select max(p0.age) from Person p0 where (p0.mother=m.id)) and p.name like ? )"
+        );
+        format_old_once(
+                "select * from Address a join Person p on a.pid = p.id, Person m join Address b on b.pid = m.id where p.mother = m.id and p.name like ?"
+        );
+        format_old_once(
+                "select case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end from Person p where ( case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end ) like ?"
+        );
+        format_old_once(
+                "/* Here we' go! */ select case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end from Person p where ( case when p.age > 50 then 'old' when p.age > 18 then 'adult' else 'child' end ) like ?"
+        );
+        format_old_once(
+                "(select p.pid from Address where city = 'Boston') union (select p.pid from Address where city = 'Taipei')"
+        );
+        format_old_once("select group0.[order] as order0 from [Group] group0 where group0.[order]=?1");
+    }
+
     private void format_new(String query) {
         for (int i = 0; i < 10000; i++) {
             FormatStyle.BASIC.getFormatter().format(query);
@@ -85,6 +143,14 @@ public class Main {
         for (int i = 0; i < 10000; i++) {
             FormatStyle.BASIC_OLD.getFormatter().format(query);
         }
+    }
+
+    private void format_new_once(String query) {
+        FormatStyle.BASIC.getFormatter().format(query);
+    }
+
+    private void format_old_once(String query) {
+        FormatStyle.BASIC_OLD.getFormatter().format(query);
     }
 
 
