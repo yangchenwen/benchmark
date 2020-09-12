@@ -16,7 +16,7 @@ import java.util.*;
  * @author Gavin King
  * @author Steve Ebersole
  */
-public class BasicFormatterImpl implements Formatter {
+public class EnumsBasicFormatterImpl implements Formatter {
 
 	private static final Set<String> BEGIN_CLAUSES = new HashSet<>();
 	private static final Set<String> END_CLAUSES = new HashSet<>();

@@ -16,7 +16,7 @@ import java.util.*;
  * @author Gavin King
  * @author Steve Ebersole
  */
-public class OldBasicFormatterImpl implements Formatter {
+public class OriginBasicFormatterImpl implements Formatter {
 
 	private static final Set<String> BEGIN_CLAUSES = new HashSet<>();
 	private static final Set<String> END_CLAUSES = new HashSet<>();

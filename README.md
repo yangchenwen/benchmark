@@ -4,78 +4,88 @@
 #### VM version: JDK 1.8.0_232, VM 25.232-b09
 
 ---
->`testFormat_new` uses the formatter with enums chain  
->`testFormat_old` uses the original formatter
-
+>14 different SQLs, each SQL formatted for 10,000 times.
 
 #### RESULT 1:
-Run complete. Total time: 00:01:00
+Run complete. Total time: 00:01:17
 
 | Benchmark | Mode | Cnt | Score | Error | Units |
 | :-------- | :--- | :---| :---- | :-----| ----: |
-| Main.testFormat_new |  thrpt  |  5 | 1.654 ± 0.024 | |ops/s | 
-| Main.testFormat_old |  thrpt  |  5 | 1.691 ± 0.050 | |ops/s | 
-| Main.testFormat_new |   avgt  |  5 | 0.597 ± 0.024 | | s/op | 
-| Main.testFormat_old |   avgt  |  5 | 0.580 ± 0.004 | | s/op |
+| Main.formatUsingEnumsFormatter         | thrpt   | 5 | 1.639 ± 0.062 | | ops/s|
+| Main.formatUsingMethodHandlesFormatter | thrpt   | 5 | 1.725 ± 0.210 | | ops/s|
+| Main.formatUsingOriginalFormatter      | thrpt   | 5 | 1.713 ± 0.081 | | ops/s|
+| Main.formatUsingEnumsFormatter          | avgt   | 5 | 0.602 ± 0.017 | |  s/op|
+| Main.formatUsingMethodHandlesFormatter  | avgt   | 5 | 0.588 ± 0.018 | |  s/op|
+| Main.formatUsingOriginalFormatter       | avgt   | 5 | 0.581 ± 0.017 | |  s/op|
 
 ---
 #### RESULT 2:
-Run complete. Total time: 00:00:59
+Run complete. Total time: 00:01:18
 
 |Benchmark  |  Mode | Cnt | Score |  Error | Units|
 | :-------- | :--- | :---| :---- | :-----| ----: |
-|Main.testFormat_new | thrpt | 5 | 1.686 ± 0.025 | |ops/s|
-|Main.testFormat_old | thrpt | 5 | 1.737 ± 0.016 | |ops/s|
-|Main.testFormat_new |  avgt | 5 | 0.601 ± 0.044 | | s/op|
-|Main.testFormat_old |  avgt | 5 | 0.579 ± 0.027 | | s/op|
+|Main.formatUsingEnumsFormatter         | thrpt  |  5 | 1.665 ± 0.108 | |  ops/s |
+|Main.formatUsingMethodHandlesFormatter | thrpt  |  5 | 1.703 ± 0.113 | |  ops/s |
+|Main.formatUsingOriginalFormatter      | thrpt  |  5 | 1.695 ± 0.080 | |  ops/s |
+|Main.formatUsingEnumsFormatter          | avgt  |  5 | 0.609 ± 0.030 | |   s/op |
+|Main.formatUsingMethodHandlesFormatter  | avgt  |  5 | 0.591 ± 0.014 | |   s/op |
+|Main.formatUsingOriginalFormatter       | avgt  |  5 | 0.598 ± 0.004 | |   s/op |
 
 ---
 #### RESULT 3:
-Run complete. Total time: 00:01:00
+Run complete. Total time: 00:01:18
 
 |Benchmark |  Mode  |Cnt | Score |  Error | Units|
 | :-------- | :--- | :---| :---- | :-----| ----: |          
-|Main.testFormat_new | thrpt  | 5 | 1.627 ± 0.022 | |ops/s|
-|Main.testFormat_old | thrpt  | 5 | 1.715 ± 0.057 | |ops/s|
-|Main.testFormat_new |  avgt  | 5 | 0.588 ± 0.022 | | s/op|
-|Main.testFormat_old |  avgt  | 5 | 0.582 ± 0.019 | | s/op|
+Main.formatUsingEnumsFormatter         | thrpt   | 5 | 1.688 ± 0.085 | |  ops/s |
+Main.formatUsingMethodHandlesFormatter | thrpt   | 5 | 1.695 ± 0.060 | |  ops/s |
+Main.formatUsingOriginalFormatter      | thrpt   | 5 | 1.698 ± 0.192 | |  ops/s |
+Main.formatUsingEnumsFormatter          | avgt   | 5 | 0.607 ± 0.030  | |  s/op |
+Main.formatUsingMethodHandlesFormatter  | avgt   | 5 | 0.601 ± 0.037  | |  s/op |
+Main.formatUsingOriginalFormatter       | avgt   | 5 | 0.575 ± 0.038  | |  s/op |
 
 ---
 ---
 
->`testFormat_new_once` uses the formatter with enums chain(call once)  
->`testFormat_old_once` uses the original formatter(call once) 
+>14 different SQLs, each SQL formatted for 1 time.
+
 #### RESULT 4:
 
 
- Run complete. Total time: 00:00:44
+ Run complete. Total time: 00:01:06
 
 |Benchmark  |  Mode | Cnt |  Score  |  Error | Units|
 | :-------- | :---  | :---| :----   | :----- | ----: |
-|Main.testFormat_new_once | thrpt |   5 |  0.015 ±  0.001 |  |ops/us|
-|Main.testFormat_old_once | thrpt |   5 |  0.016 ±  0.001 |  |ops/us|
-|Main.testFormat_new_once |  avgt |   5 | 65.084 ±  2.507 |  | us/op|
-|Main.testFormat_old_once |  avgt |   5 | 64.723 ±  1.394 |  | us/op|
+|MainTest.formatOnceUsingEnumsFormatter         | thrpt   | 5 |   0.016 ± 0.001 | |  ops/us|
+|MainTest.formatOnceUsingMethodHandlesFormatter | thrpt   | 5 |   0.016 ± 0.001 | |  ops/us|
+|MainTest.formatOnceUsingOriginalFormatter      | thrpt   | 5 |   0.016 ± 0.001 | |  ops/us|
+|MainTest.formatOnceUsingEnumsFormatter          | avgt   | 5 |  63.756 ± 2.288  | |  us/op|
+|MainTest.formatOnceUsingMethodHandlesFormatter  | avgt   | 5 |  60.989 ± 3.042  | |  us/op|
+|MainTest.formatOnceUsingOriginalFormatter       | avgt   | 5 |  63.442 ± 2.691  | |  us/op|
 
 #### RESULT 5:
 
- Run complete. Total time: 00:00:44
+ Run complete. Total time: 00:01:06
 
 |Benchmark  |  Mode | Cnt |  Score  |  Error | Units|
 | :-------- | :---  | :---| :----   | :----- | ----: |
-|Main.testFormat_new_once | thrpt |   5 |  0.016 ±  0.001 |  |ops/us|
-|Main.testFormat_old_once | thrpt |   5 |  0.016 ±  0.001 |  |ops/us|
-|Main.testFormat_new_once |  avgt |   5 | 65.066 ±  1.715 |  | us/op|
-|Main.testFormat_old_once |  avgt |   5 | 64.789 ±  2.192 |  | us/op|
+|MainTest.formatOnceUsingEnumsFormatter          |thrpt    |5|   0.015 ± 0.001 | | ops/us|
+|MainTest.formatOnceUsingMethodHandlesFormatter  |thrpt    |5|   0.016 ± 0.001 | | ops/us|
+|MainTest.formatOnceUsingOriginalFormatter       |thrpt    |5|   0.016 ± 0.001 | | ops/us|
+|MainTest.formatOnceUsingEnumsFormatter           |avgt    |5|  63.965 ± 2.592  | | us/op|
+|MainTest.formatOnceUsingMethodHandlesFormatter   |avgt    |5|  62.690 ± 2.864  | | us/op|
+|MainTest.formatOnceUsingOriginalFormatter        |avgt    |5|  63.321 ± 2.055  | | us/op|
 
 
 #### RESULT 6:
 
- Run complete. Total time: 00:00:44
+ Run complete. Total time: 00:01:06
 
 |Benchmark  |  Mode | Cnt |  Score  |  Error | Units|
 | :-------- | :---  | :---| :----   | :----- | ----: |
-|Main.testFormat_new_once | thrpt |   5 |  0.015 ± 0.001 |  |ops/us|
-|Main.testFormat_old_once | thrpt |   5 |  0.015 ± 0.001 |  |ops/us|
-|Main.testFormat_new_once |  avgt |   5 | 63.081 ± 2.136 |  | us/op|
-|Main.testFormat_old_once |  avgt |   5 | 65.709 ± 0.564 |  | us/op|
+|MainTest.formatOnceUsingEnumsFormatter          |thrpt    |5|   0.016 ± 0.001 | | ops/us|
+|MainTest.formatOnceUsingMethodHandlesFormatter  |thrpt    |5|   0.016 ± 0.001 | | ops/us|
+|MainTest.formatOnceUsingOriginalFormatter       |thrpt    |5|   0.016 ± 0.001 | | ops/us|
+|MainTest.formatOnceUsingEnumsFormatter           |avgt    |5|  61.507 ± 2.139  | | us/op|
+|MainTest.formatOnceUsingMethodHandlesFormatter   |avgt    |5|  62.925 ± 2.297  | | us/op|
+|MainTest.formatOnceUsingOriginalFormatter        |avgt    |5|  63.715 ± 2.818  | | us/op|

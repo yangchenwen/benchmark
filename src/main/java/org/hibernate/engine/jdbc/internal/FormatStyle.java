@@ -15,8 +15,9 @@ public enum FormatStyle {
 	/**
 	 * Formatting for SELECT, INSERT, UPDATE and DELETE statements
 	 */
-	BASIC( "basic", new BasicFormatterImpl() ),
-	BASIC_OLD( "basic", new OldBasicFormatterImpl() ),
+	BASIC_ENUMS( "basic", new EnumsBasicFormatterImpl() ),
+	BASIC_ORIGIN( "basic", new OriginBasicFormatterImpl() ),
+	BASIC_METHOD_HANDLES( "basic", new MethodHandlesBasicFormatterImpl() ),
 	/**
 	 * Formatting for DDL (CREATE, ALTER, DROP, etc) statements
 	 */
